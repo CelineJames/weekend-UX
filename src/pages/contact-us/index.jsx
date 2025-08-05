@@ -44,9 +44,7 @@ export default function Contact() {
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
@@ -70,7 +68,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="w-full max-w-full relative overflow-hidden pb-12">
+    <div className="w-full relative overflow-hidden pb-12 mt-32 md:mt-0">
       {/* Decorative elements */}
       <img
         src={greenSquares}
@@ -82,16 +80,26 @@ export default function Contact() {
         alt=""
         className="absolute -bottom-12 right-0 z-0"
       />
-      <img src={dots} alt="" className="absolute top-10 right-48 z-0" />
-      <img src={dots} alt="" className="absolute bottom-24 left-56 z-0" />
+      <img
+        src={dots}
+        alt=""
+        className="absolute top-10 right-10 md:right-48 z-0"
+      />
+      <img
+        src={dots}
+        alt=""
+        className="absolute bottom-24 left-10 md:left-56 z-0"
+      />
 
-      <div className="relative z-10 px-10 shadow-lg w-[60%] mx-auto my-28 py-12 bg-white rounded-md">
-        <h1 className="text-2xl text-primary font-semibold underline text-center pb-6">
+      <div className="relative z-10 w-full max-w-[90%] md:max-w-[80%] lg:max-w-[70%] mx-auto my-20 p-4 md:p-6 sm:p-10 bg-white rounded-md shadow-lg">
+        <h1 className="text-xl sm:text-2xl text-primary font-semibold underline text-center pb-6">
           Contact Us
         </h1>
-        <div className="flex justify-between items-start gap-4 mt-6">
-          <div className="w-1/2 pr-6">
-            <p className="font-semibold text-lg text-black mb-6 text-left">
+
+        <div className="flex flex-col lg:flex-row justify-between gap-10 mt-6">
+          {/* Form Section */}
+          <div className="w-full lg:w-1/2">
+            <p className="font-semibold text-lg text-black mb-6">
               Leave us a message
             </p>
 
@@ -148,6 +156,7 @@ export default function Contact() {
               >
                 {loading ? "Sending..." : "Send"}
               </button>
+
               {responseMessage && (
                 <p
                   className={`mt-4 text-sm ${
@@ -162,12 +171,12 @@ export default function Contact() {
             </form>
           </div>
 
-          {/* Contact Info */}
-          <div className="w-1/2 mt-10">
-            <div className="pl-6">
+          {/* Contact Info Section */}
+          <div className="w-full lg:w-1/2">
+            <div className="mt-10 lg:mt-0">
               <p className="font-bold text-lg mb-1">Weekend UX</p>
-              <p className="whitespace-break-spaces text-sm mb-4">
-                No. 10 Wuse 2, <br /> Abuja, Nigeria
+              <p className="whitespace-pre-line text-sm mb-4">
+                No. 10 Wuse 2,{"\n"}Abuja, Nigeria
               </p>
 
               <a
@@ -189,33 +198,49 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src={youtube} alt="YouTube" />
+                  <img
+                    src={youtube}
+                    alt="YouTube"
+                    className="w-6 h-6 sm:w-8 sm:h-8"
+                  />
                 </a>
                 <a
                   href="https://instagram.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src={instagram} alt="Instagram" />
+                  <img
+                    src={instagram}
+                    alt="Instagram"
+                    className="w-6 h-6 sm:w-8 sm:h-8"
+                  />
                 </a>
                 <a
                   href="https://facebook.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src={facebook} alt="Facebook" />
+                  <img
+                    src={facebook}
+                    alt="Facebook"
+                    className="w-6 h-6 sm:w-8 sm:h-8"
+                  />
                 </a>
                 <a
                   href="https://twitter.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src={twitter} alt="Twitter" />
+                  <img
+                    src={twitter}
+                    alt="Twitter"
+                    className="w-6 h-6 sm:w-8 sm:h-8"
+                  />
                 </a>
               </div>
             </div>
 
-            <div className="mt-8 pl-6">
+            <div className="mt-8">
               <iframe
                 title="Weekend UX Location - Abuja"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3931.506129267131!2d7.488380675936353!3d9.07434439099556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e0b0c2a3b5533%3A0xb6ce239b06f427eb!2sWuse%202%2C%20Abuja%2C%20Nigeria!5e0!3m2!1sen!2sng!4v1719374567890!5m2!1sen!2sng"

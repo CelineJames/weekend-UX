@@ -219,12 +219,6 @@ export default function Classes() {
               </div>
             ))}
           </div>
-
-          <div className="flex justify-center w-full">
-            <button className="mt-12 p-2 w-[170px] rounded-md text-sm font-semibold bg-gray3 border border-gray1">
-              Explore all programs
-            </button>
-          </div>
         </div>
 
         {/* ✅ Dots (scroll controlled) */}
@@ -238,6 +232,11 @@ export default function Classes() {
               }`}
             ></button>
           ))}
+        </div>
+        <div className="flex justify-center w-full">
+          <button className="mt-12 p-2 w-[170px] rounded-md text-sm font-semibold bg-gray3 border border-gray1">
+            Explore all programs
+          </button>
         </div>
       </div>
     </div>
