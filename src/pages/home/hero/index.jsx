@@ -1,6 +1,6 @@
 import bag from "@/assets/bag.png";
 import idea from "@/assets/idea.svg";
-import speak from "@/assets/speak.png";
+import speak from "@/assets/Speak.png";
 import girl from "@/assets/young-girl.png";
 import circle from "@/assets/circle-rings.png";
 import thinCircle from "@/assets/thin-circle.png";
