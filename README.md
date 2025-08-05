@@ -4,7 +4,7 @@
 
 ---
 
-## 🚀 Project Overview
+## Project Overview
 
 This project represents the homepage of an online school that teaches valuable tech skills. It is fully responsive and optimized for both desktop and mobile devices, featuring:
 
@@ -15,7 +15,7 @@ This project represents the homepage of an online school that teaches valuable t
 
 ---
 
-## 🛠️ Built With
+## Built With
 
 - ⚡ [Vite](https://vitejs.dev/) – Frontend build tool for faster development
 - 🎨 [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework
@@ -23,7 +23,7 @@ This project represents the homepage of an online school that teaches valuable t
 
 ---
 
-## 📦 Installation & Setup
+## Installation & Setup
 
 1. **Clone the repository**
 
