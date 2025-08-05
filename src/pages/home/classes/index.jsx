@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import star from "@/assets/star.png";
 import interfaceClass from "@/assets/user-interface.png";
@@ -108,37 +108,66 @@ const classes = [
 ];
 
 export default function Classes() {
-  const [currentIndex, setCurrentIndex] = useState(0); // or based on scroll later
-  const maxVisibleDots = 4;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollRef = useRef(null);
+  const cardWidth = 400; // approximate width of each card (adjust if needed)
 
-  const visibleDotsStart = Math.max(0, currentIndex - 1); // Show 4 max centered around current
+  const maxVisibleDots = 5;
+  const visibleDotsStart = Math.max(0, currentIndex - 1);
   const visibleDots = classes
     .map((_, i) => i)
     .slice(visibleDotsStart, visibleDotsStart + maxVisibleDots);
 
+  // ✅ Scroll-based index detection
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+
+    const handleScroll = () => {
+      const scrollLeft = scrollContainer.scrollLeft;
+      const index = Math.round(scrollLeft / cardWidth);
+      setCurrentIndex(index);
+    };
+
+    scrollContainer.addEventListener("scroll", handleScroll);
+    return () => scrollContainer.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // ✅ Scroll to card when dot clicked
+  const handleDotClick = (index) => {
+    const scrollContainer = scrollRef.current;
+    if (scrollContainer) {
+      scrollContainer.scrollTo({
+        left: index * cardWidth,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <>
-      <div className="w-full h-auto px-4 md:px-8 mt-24 mb-10">
-        <div className="mb-10 px-8">
-          <span className="text-primary font-bold text-sm">
-            Explore Programs
-          </span>
-          <h3 className="text-black text-2xl font-semibold mb-2">
-            Our Most Popular Class
-          </h3>
-          <p className="font-light text-gray2 text-base">
-            Let's join our famous class, the knowledge provided will definitely
-            be useful for you.
-          </p>
-        </div>
-        {/* scroll through classes */}
-        <div className="overflow-x-auto  whitespace-nowrap scrollbar-hide mb-10">
+    <div className="w-full h-auto px-4 md:px-8 mt-24 mb-10">
+      {/* Title */}
+      <div className="mb-10 px-8">
+        <span className="text-primary font-bold text-sm">Explore Programs</span>
+        <h3 className="text-black text-2xl font-semibold mb-2">
+          Our Most Popular Class
+        </h3>
+        <p className="font-light text-gray2 text-base">
+          Let's join our famous class, the knowledge provided will definitely be
+          useful for you.
+        </p>
+      </div>
+
+      {/* Scrollable section */}
+      <div className="relative">
+        <div
+          ref={scrollRef}
+          className="overflow-x-auto whitespace-nowrap scrollbar-hide mb-10"
+        >
           <div data-aos="zoom-in" className="flex gap-6 md:px-5">
             {classes.map((item, idx) => (
               <div
                 key={idx}
-                className=" w-full max-w-[384px] flex-shrink-0 p-3 md:p-8 shadow-md mb-5 rounded-md bg-white transition-transform duration-300 transform hover:-translate-y-2 hover:shadow-lg"
-                onMouseEnter={() => setCurrentIndex(idx)}
+                className="w-full max-w-[384px] flex-shrink-0 p-3 md:p-8 shadow-md mb-5 rounded-md bg-white transition-transform duration-300 transform hover:-translate-y-2 hover:shadow-lg"
               >
                 <img src={item.image} alt={item.title} className="w-full" />
                 <span className="text-primary font-bold text-sm">
@@ -170,11 +199,12 @@ export default function Classes() {
                     {item.rating.suscribers}
                   </span>
                 </div>
+
                 <div className="flex justify-between items-center mt-8">
                   <div className="flex justify-between items-center gap-3">
                     <img src={item.cost.image} />
                     <div>
-                      <h5 className="text-[0.9rem]  text-semibold">
+                      <h5 className="text-[0.9rem] text-semibold">
                         {item.cost.name}
                       </h5>
                       <span className="text-[0.7rem] font-[100] text-gray2">
@@ -189,25 +219,27 @@ export default function Classes() {
               </div>
             ))}
           </div>
-          {/* scrolable dots */}
-          <div className="flex justify-center gap-2 mt-6">
-            {visibleDots.map((i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentIndex(i)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  currentIndex === i ? "w-8 bg-primary" : "w-2 bg-gray-300"
-                }`}
-              ></button>
-            ))}
-          </div>
+
           <div className="flex justify-center w-full">
             <button className="mt-12 p-2 w-[170px] rounded-md text-sm font-semibold bg-gray3 border border-gray1">
               Explore all programs
             </button>
           </div>
         </div>
+
+        {/* ✅ Dots (scroll controlled) */}
+        <div className="flex justify-center gap-2 mt-6">
+          {visibleDots.map((i) => (
+            <button
+              key={i}
+              onClick={() => handleDotClick(i)}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                currentIndex === i ? "w-8 bg-primary" : "w-2 bg-gray-300"
+              }`}
+            ></button>
+          ))}
+        </div>
       </div>
-    </>
+    </div>
   );
 }

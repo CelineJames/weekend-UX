@@ -34,10 +34,10 @@ const services = [
 ];
 
 export default function Services() {
-  const [currentIndex, setCurrentIndex] = useState(0); // or based on scroll later
-  const maxVisibleDots = 4;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const maxVisibleDots = 5;
 
-  const visibleDotsStart = Math.max(0, currentIndex - 1); // Show 4 max centered around current
+  const visibleDotsStart = Math.max(0, currentIndex - 1);
   const visibleDots = services
     .map((_, i) => i)
     .slice(visibleDotsStart, visibleDotsStart + maxVisibleDots);
@@ -55,34 +55,37 @@ export default function Services() {
         </h2>
       </div>
 
-      {/* Scrollable Cards */}
-      <div className="overflow-x-auto whitespace-nowrap px-4 md:px-8 scrollbar-hide mb-10">
-        <div data-aos="fade-left" className="flex py-4 gap-6">
-          {services.map((service, idx) => (
-            <div
-              key={idx}
-              className="w-full max-w-[412px] bg-white p-7 rounded-xl shadow-lg flex-shrink-0 transition-all duration-300 hover:bg-primary hover:text-white group"
-              onMouseEnter={() => setCurrentIndex(idx)} // simulate active
-            >
-              <div className="flex gap-4 items-center justify-start mb-4">
-                <img src={service.image} alt="icon" className="size-12" />
-                <h3 className="text-xl font-bold text-black mb-2 group-hover:text-white">
-                  {service.heading}
-                </h3>
+      {/* Cards Section */}
+      <div className="relative">
+        {/* Scrollable Cards */}
+        <div className="overflow-x-auto whitespace-nowrap px-4 md:px-8 scrollbar-hide mb-4">
+          <div data-aos="fade-left" className="flex py-4 gap-6">
+            {services.map((service, idx) => (
+              <div
+                key={idx}
+                className="w-full max-w-[412px] bg-white p-7 rounded-xl shadow-lg flex-shrink-0 transition-all duration-300 hover:bg-primary hover:text-white group"
+                onMouseEnter={() => setCurrentIndex(idx)}
+              >
+                <div className="flex gap-4 items-center justify-start mb-4">
+                  <img src={service.image} alt="icon" className="size-12" />
+                  <h3 className="text-xl font-bold text-black mb-2 group-hover:text-white">
+                    {service.heading}
+                  </h3>
+                </div>
+                <p className="text-gray-600 whitespace-break-spaces group-hover:text-white mb-5">
+                  {service.text}
+                </p>
+                <button className="flex items-center text-primary group-hover:text-white font-semibold hover:underline">
+                  Learn More
+                  <ArrowRightIcon className="w-4 h-4 ml-1" />
+                </button>
               </div>
-              <p className="text-gray-600 whitespace-break-spaces group-hover:text-white mb-5">
-                {service.text}
-              </p>
-              <button className="flex items-center text-primary group-hover:text-white font-semibold hover:underline">
-                Learn More
-                <ArrowRightIcon className="w-4 h-4 ml-1" />
-              </button>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
-        {/* Dot Carousel */}
-        <div className="flex justify-center gap-2 mt-6">
+        {/* Dots Below Cards (Fixed Position) */}
+        <div className="flex justify-center gap-2 mt-4">
           {visibleDots.map((i) => (
             <button
               key={i}
