@@ -1,4 +1,4 @@
-# weekend-UX 🎓💻
+# weekend-UX
 
 **weekend-UX** is a modern, responsive website for an online tech skills school, designed to provide learners with a smooth, engaging, and mobile-friendly user experience. Built with **Vite**, **Tailwind CSS**, and **JavaScript**, the project demonstrates clean UI/UX design principles suitable for beginner and intermediate front-end developers.
 
